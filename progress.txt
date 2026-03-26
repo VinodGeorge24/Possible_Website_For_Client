@@ -1,0 +1,39 @@
+# Ralph Progress Log
+Started: 2026-03-25 21:40 America/New_York
+
+## Codebase Patterns
+- Public brand copy, homepage sections, and FAQ content live in `frontend/src/content/siteContent.js`.
+- Inquiry-first backend behavior lives in `backend/inquiries/`; use that surface for v1 lead capture instead of extending the legacy payment flow.
+- V1 launch scope is intentionally inquiry-first. Treat Stripe and direct booking as phase 2 unless a story explicitly says otherwise.
+
+---
+
+## [2026-03-25 21:38] - [US-001]
+- Story: Remove stale Sheena Residence branding from tracked source
+- Implemented:
+  - Updated frontend package and manifest metadata to Scottsdale Desert Oasis branding.
+  - Replaced remaining legacy fallback branding in booking confirmation template and Stripe helper copy.
+  - Updated booking confirmation template context so fallback business email and phone values come from settings.
+- Files changed:
+  - `frontend/package.json`
+  - `frontend/public/manifest.json`
+  - `backend/booking/stripe_utils.py`
+  - `backend/booking/views.py`
+  - `backend/templates/emails/booking_confirmation.html`
+  - `prd.json`
+  - `progress.txt`
+- Validation:
+  - `python manage.py test`
+  - `npm run build`
+  - Playwright browser verification on `http://localhost:3000/` confirmed the page title is `Scottsdale Desert Oasis`
+  - Exact search for `Sheena Residence` in tracked source excluding Ralph artifacts returned no matches
+- Learnings for future iterations:
+  - Patterns:
+    - Legacy phase-2 files can still leak old branding even when the public v1 path has already been reworked.
+    - Manifest and package metadata are easy to miss during rebrands and should be part of the final branding sweep.
+  - Gotchas:
+    - PowerShell content searches need explicit exclusions for `build`, `__pycache__`, and the Ralph artifacts to avoid noisy false positives.
+  - Useful context:
+    - Backend tests intentionally log SMTP failure traces for the mocked error-handling test while still passing.
+
+---

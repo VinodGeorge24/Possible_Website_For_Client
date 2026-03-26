@@ -319,8 +319,10 @@ class BookingViewSet(viewsets.ModelViewSet):
                 'total_amount': '{:.2f}'.format(booking.total_price),
                 'manage_booking_url': f"{settings.FRONTEND_URL}/bookings/{booking.id}",
                 'property_images': property_images,
-                'property_name': booking.property.name if booking.property else 'Sheena Residence',
+                'property_name': booking.property.name if booking.property else settings.BUSINESS_NAME,
                 'property_address': settings.BUSINESS_ADDRESS,
+                'business_phone': settings.BUSINESS_PHONE,
+                'business_email': settings.INQUIRY_TO_EMAIL or settings.DEFAULT_FROM_EMAIL,
             }
             
             html_message = render_to_string('emails/booking_confirmation.html', context)
@@ -424,6 +426,8 @@ def handle_successful_payment(payment_intent):
             'property_images': property_images,
             'property_name': booking.property.name,
             'property_address': settings.BUSINESS_ADDRESS,
+            'business_phone': settings.BUSINESS_PHONE,
+            'business_email': settings.INQUIRY_TO_EMAIL or settings.DEFAULT_FROM_EMAIL,
         }
         
         html_message = render_to_string('emails/booking_confirmation.html', context)

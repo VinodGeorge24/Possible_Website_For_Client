@@ -1,6 +1,6 @@
 {
-  "short_name": "Sheena Residence",
-  "name": "Sheena Residence - Luxury Accommodations",
+  "short_name": "Desert Oasis",
+  "name": "Scottsdale Desert Oasis",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#f6ecdf",
+  "background_color": "#f8f1e7"
 }

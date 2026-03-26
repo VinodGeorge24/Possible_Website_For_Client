@@ -1,0 +1,49 @@
+{
+  "project": "Scottsdale Desert Oasis",
+  "branchName": "codex/ralph-relaunch-v1",
+  "description": "Iterative launch hardening for the inquiry-first Scottsdale kosher rental website",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Remove stale Sheena Residence branding from tracked source",
+      "description": "As the site owner, I need the tracked source to consistently use Scottsdale Desert Oasis so the sellable v1 does not leak the previous property identity.",
+      "acceptanceCriteria": [
+        "Tracked source files no longer contain Sheena Residence in current metadata or booking fallback email copy",
+        "Frontend manifest and package metadata match Scottsdale Desert Oasis branding",
+        "Backend tests pass",
+        "Frontend build passes",
+        "Verify in browser that the public site title is Scottsdale Desert Oasis"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Use verification-before-completion. Use playwright for browser verification. Keep scope to branding cleanup only; do not delete legacy payment files in this story."
+    },
+    {
+      "id": "US-002",
+      "title": "Add frontend tests for inquiry forms",
+      "description": "As a maintainer, I need automated coverage for the contact and stay-request forms so future UI changes do not silently break the inquiry-first launch path.",
+      "acceptanceCriteria": [
+        "Contact form has a passing test for successful submission state",
+        "Booking request form has a passing test for successful submission state",
+        "Tests mock the inquiry API client instead of making network calls",
+        "Relevant frontend test command passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "Prefer test-driven-development. Use verification-before-completion."
+    },
+    {
+      "id": "US-003",
+      "title": "Harden launch handoff documentation for deployment",
+      "description": "As the client handoff owner, I need an explicit deployment and ownership checklist so the site can move from local development to a real environment cleanly.",
+      "acceptanceCriteria": [
+        "Docs include frontend hosting, backend hosting, environment variables, and Mailtrap-to-production email switch guidance",
+        "Docs clearly separate v1 inquiry-first launch from deferred payment work",
+        "Documentation references the current repo structure and command set"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "Use verification-before-completion. Keep this story documentation-only."
+    }
+  ]
+}
