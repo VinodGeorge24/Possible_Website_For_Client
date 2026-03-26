@@ -29,7 +29,7 @@
         "Relevant frontend test command passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Prefer test-driven-development. Use verification-before-completion."
     },
     {
