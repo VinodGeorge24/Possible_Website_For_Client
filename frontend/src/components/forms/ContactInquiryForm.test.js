@@ -30,11 +30,13 @@ describe('ContactInquiryForm', () => {
       target: { value: 'rachel@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/phone/i), {
-      target: { value: '480-555-1111' },
+      target: { value: '4805551111' },
     });
     fireEvent.change(screen.getByLabelText(/message/i), {
       target: { value: 'Can you confirm the planned Shabbos setup?' },
     });
+
+    expect(screen.getByLabelText(/phone/i)).toHaveValue('(480) 555-1111');
 
     fireEvent.click(screen.getByRole('button', { name: /send your message/i }));
 
@@ -42,7 +44,7 @@ describe('ContactInquiryForm', () => {
       expect(submitContactInquiry).toHaveBeenCalledWith({
         name: 'Rachel Guest',
         email: 'rachel@example.com',
-        phone: '480-555-1111',
+        phone: '(480) 555-1111',
         message: 'Can you confirm the planned Shabbos setup?',
       });
     });

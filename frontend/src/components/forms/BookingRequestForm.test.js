@@ -33,7 +33,7 @@ describe('BookingRequestForm', () => {
       target: { value: 'david@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/phone/i), {
-      target: { value: '480-555-2222' },
+      target: { value: '4805552222' },
     });
     fireEvent.change(screen.getByLabelText(/check-in/i), {
       target: { value: '2030-05-10' },
@@ -48,6 +48,8 @@ describe('BookingRequestForm', () => {
       target: { value: 'Please let us know if the pool can be heated.' },
     });
 
+    expect(screen.getByLabelText(/phone/i)).toHaveValue('(480) 555-2222');
+
     fireEvent.click(screen.getByRole('button', { name: /request your stay/i }));
 
     await waitFor(() => {
@@ -55,7 +57,7 @@ describe('BookingRequestForm', () => {
         first_name: 'David',
         last_name: 'Levi',
         email: 'david@example.com',
-        phone: '480-555-2222',
+        phone: '(480) 555-2222',
         check_in_date: '2030-05-10',
         check_out_date: '2030-05-14',
         guests: 6,
