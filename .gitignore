@@ -1,0 +1,43 @@
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+backend/venv/
+
+# Environment files
+.env
+*.env
+!.env.example
+backend/.env
+frontend/.env
+
+# Django / local data
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# Node / frontend build
+frontend/node_modules/
+frontend/build/
+frontend/.cache/
+
+# Logs
+*.log
+backend/*server*.log
+frontend/*server*.log
+
+# Editor folders
+.idea/
+.vscode/

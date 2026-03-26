@@ -1,0 +1,17 @@
+{{ headline }} {{ inquiry.name }}
+
+Inquiry type: {{ inquiry.get_kind_display }}
+Name: {{ inquiry.name }}
+Email: {{ inquiry.email }}
+Phone: {{ inquiry.phone|default:"Not provided" }}
+
+{% if inquiry.kind == 'booking_request' %}
+Check-in: {{ inquiry.check_in_date }}
+Check-out: {{ inquiry.check_out_date }}
+Guests: {{ inquiry.guests }}
+{% endif %}
+
+Message:
+{{ inquiry.message|default:"No additional notes provided." }}
+
+Review this lead in Django admin for the latest status.

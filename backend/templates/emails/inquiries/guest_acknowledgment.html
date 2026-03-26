@@ -1,0 +1,17 @@
+<html>
+  <body style="font-family: Arial, sans-serif; color: #1f2933; line-height: 1.6;">
+    <p>Hello {{ inquiry.name }},</p>
+    <p>Thank you for reaching out to {{ business_name }}.</p>
+    {% if inquiry.kind == 'booking_request' %}
+    <p>
+      We received your stay request for <strong>{{ inquiry.check_in_date }}</strong> to
+      <strong>{{ inquiry.check_out_date }}</strong> for <strong>{{ inquiry.guests }}</strong> guest(s).
+      We will follow up shortly with availability and next steps.
+    </p>
+    {% else %}
+    <p>We received your message and will follow up shortly.</p>
+    {% endif %}
+    <p>If you need anything urgently, please reply to this email or call {{ business_phone }}.</p>
+    <p>Warm regards,<br />{{ business_name }}</p>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+  <body style="font-family: Arial, sans-serif; color: #1f2933; line-height: 1.6;">
+    <p style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #9a3412;">{{ headline }}</p>
+    <h1 style="margin: 0 0 16px;">{{ inquiry.name }}</h1>
+    <p><strong>Inquiry type:</strong> {{ inquiry.get_kind_display }}</p>
+    <p><strong>Email:</strong> {{ inquiry.email }}</p>
+    <p><strong>Phone:</strong> {{ inquiry.phone|default:"Not provided" }}</p>
+    {% if inquiry.kind == 'booking_request' %}
+    <p><strong>Check-in:</strong> {{ inquiry.check_in_date }}</p>
+    <p><strong>Check-out:</strong> {{ inquiry.check_out_date }}</p>
+    <p><strong>Guests:</strong> {{ inquiry.guests }}</p>
+    {% endif %}
+    <p><strong>Message:</strong></p>
+    <p>{{ inquiry.message|default:"No additional notes provided."|linebreaksbr }}</p>
+    <p style="margin-top: 24px;">Review this lead in Django admin for the latest status.</p>
+  </body>
+</html>
