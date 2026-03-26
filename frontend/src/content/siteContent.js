@@ -1,11 +1,11 @@
 export const siteContent = {
   brand: {
-    name: 'Scottsdale Desert Oasis',
-    shortName: 'Desert Oasis',
+    name: 'Sheena Residence',
+    shortName: 'Sheena Residence',
     eyebrow: 'Kosher-friendly Scottsdale stay',
     title: 'Desert warmth, polished comfort, and a kosher-minded family getaway.',
     description:
-      'Scottsdale Desert Oasis is positioned for guests who want an elevated Arizona retreat with private outdoor space, flexible sleeping arrangements, and thoughtful Shabbos-friendly touches.',
+      'Sheena Residence is positioned for guests who want an elevated Arizona retreat with private outdoor space, flexible sleeping arrangements, and thoughtful Shabbos-friendly touches.',
     address: '7028 E Sheena Drive, Scottsdale, Arizona 85254',
     phone: '(480) 555-0123',
   },

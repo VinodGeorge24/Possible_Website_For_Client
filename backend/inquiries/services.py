@@ -1,13 +1,15 @@
 import logging
+import time
+from smtplib import SMTPDataError, SMTPServerDisconnected
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.html import strip_tags
 
 
 logger = logging.getLogger(__name__)
+MAILTRAP_BACKOFF_SECONDS = 2.5
 
 
 def send_inquiry_emails(inquiry):
@@ -19,6 +21,9 @@ def send_inquiry_emails(inquiry):
     except Exception as exc:
         email_error = f'Business notification failed: {exc}'
         logger.exception('Failed to send inquiry notification for inquiry %s', inquiry.id)
+
+    if inquiry.notification_sent_at and _is_mailtrap_sandbox():
+        time.sleep(MAILTRAP_BACKOFF_SECONDS)
 
     try:
         _send_guest_acknowledgment(inquiry)
@@ -59,7 +64,7 @@ def _send_business_notification(inquiry):
         bcc=[settings.INQUIRY_BCC_EMAIL] if settings.INQUIRY_BCC_EMAIL else [],
     )
     message.attach_alternative(html_body, 'text/html')
-    message.send(fail_silently=False)
+    _send_message_with_retry(message)
 
 
 def _send_guest_acknowledgment(inquiry):
@@ -81,4 +86,42 @@ def _send_guest_acknowledgment(inquiry):
         to=[inquiry.email],
     )
     message.attach_alternative(html_body, 'text/html')
-    message.send(fail_silently=False)
+    _send_message_with_retry(message)
+
+
+def _send_message_with_retry(message: EmailMultiAlternatives) -> None:
+    try:
+        message.send(fail_silently=False)
+    except (SMTPDataError, SMTPServerDisconnected) as exc:
+        if not _should_retry_send(exc):
+            raise
+
+        logger.warning('Retrying email send after transient SMTP error: %s', exc)
+        _reset_message_connection(message)
+        time.sleep(MAILTRAP_BACKOFF_SECONDS)
+        message.send(fail_silently=False)
+
+
+def _should_retry_send(exc: Exception) -> bool:
+    if isinstance(exc, SMTPServerDisconnected):
+        return True
+
+    if isinstance(exc, SMTPDataError):
+        error_text = str(exc).lower()
+        return 'too many emails per second' in error_text
+
+    return False
+
+
+def _reset_message_connection(message: EmailMultiAlternatives) -> None:
+    if message.connection:
+        try:
+            message.connection.close()
+        except Exception:
+            logger.debug('Failed to close stale email connection before retry.', exc_info=True)
+
+    message.connection = None
+
+
+def _is_mailtrap_sandbox() -> bool:
+    return 'mailtrap.io' in settings.EMAIL_HOST.lower()

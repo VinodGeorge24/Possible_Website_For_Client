@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmation - Sheena Residence</title>
+    <title>Booking Confirmation - {{ property_name }}</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -111,7 +111,7 @@
 
         <p>Dear {{ guest_name }},</p>
 
-        <p>Thank you for choosing Sheena Residence! We're excited to host you during your stay in Scottsdale.</p>
+        <p>Thank you for choosing {{ property_name }}. We're excited to host you during your stay in Scottsdale.</p>
 
         <div class="booking-details">
             <h2>Booking Details</h2>
@@ -179,13 +179,13 @@
 
         <div class="emergency">
             <strong>24/7 Emergency Contact:</strong><br>
-            Phone: (480) 555-0911
+            Phone: {{ business_phone|default:"(480) 555-0911" }}
         </div>
 
         <div class="footer">
             <p>If you have any questions, please don't hesitate to contact us:</p>
             <p>Phone: (480) 555-0123<br>
-            Email: booking.sheenaresidence@gmail.com</p>
+            Email: {{ business_email|default:"hello@example.com" }}</p>
             <p><small>This is a confirmed booking. Please keep this email for your records.</small></p>
         </div>
     </div>

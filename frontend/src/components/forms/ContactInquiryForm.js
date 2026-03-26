@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { getErrorMessage, submitContactInquiry } from '../../lib/inquiries';
+import { formatPhoneNumber } from '../../lib/phone';
 
 
 const initialState = {
@@ -19,7 +20,8 @@ const ContactInquiryForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((current) => ({ ...current, [name]: value }));
+    const nextValue = name === 'phone' ? formatPhoneNumber(value) : value;
+    setFormData((current) => ({ ...current, [name]: nextValue }));
     setErrors((current) => ({ ...current, [name]: undefined }));
   };
 
@@ -80,8 +82,13 @@ const ContactInquiryForm = () => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
+          inputMode="numeric"
+          autoComplete="tel-national"
+          maxLength="14"
+          placeholder="(111) 111-1111"
           className="mt-2 w-full rounded-2xl border border-[#d9c2ac] bg-white/90 px-4 py-3 text-[#2f241d] outline-none transition focus:border-[#9a5a36] focus:ring-2 focus:ring-[#ead4c4]"
         />
+        {errors.phone ? <span className="mt-1 block text-sm text-[#a13f2d]">{errors.phone[0]}</span> : null}
       </label>
 
       <label className="block text-sm font-medium text-[#47372c]">

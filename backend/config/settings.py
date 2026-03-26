@@ -146,13 +146,13 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Scottsdale Desert Oasis <hello@example.com>')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Sheena Residence <hello@example.com>')
 CONTACT_EMAIL = EMAIL_HOST_USER  # Use the same email for contact
 INQUIRY_TO_EMAIL = os.getenv('INQUIRY_TO_EMAIL', CONTACT_EMAIL)
 INQUIRY_BCC_EMAIL = os.getenv('INQUIRY_BCC_EMAIL', '')
 
 # Business Information
-BUSINESS_NAME = 'Scottsdale Desert Oasis'
+BUSINESS_NAME = 'Sheena Residence'
 BUSINESS_ADDRESS = '7028 E Sheena Drive, Scottsdale, Arizona 85254'
 BUSINESS_PHONE = '(480) 555-0123'
 BUSINESS_HOURS = {

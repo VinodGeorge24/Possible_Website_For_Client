@@ -56,11 +56,11 @@ def send_booking_confirmation_email(booking):
     """
     Send a confirmation email for a successful booking
     """
-    subject = 'Booking Confirmation - Sheena Residence'
+    subject = f'Booking Confirmation - {settings.BUSINESS_NAME}'
     message = f"""
     Dear {booking.first_name},
 
-    Thank you for booking your stay at Sheena Residence. Your booking has been confirmed!
+    Thank you for booking your stay at {settings.BUSINESS_NAME}. Your booking has been confirmed!
 
     Booking Details:
     - Check-in: {booking.check_in_date.strftime('%B %d, %Y')}
@@ -83,7 +83,7 @@ def send_booking_confirmation_email(booking):
     We look forward to hosting you!
 
     Best regards,
-    Sheena Residence Team
+    {settings.BUSINESS_NAME} Team
     """
     
     try:

@@ -1,0 +1,70 @@
+# Ralph Progress Log
+Started: 2026-03-25 21:40 America/New_York
+
+## Codebase Patterns
+- Public brand copy, homepage sections, and FAQ content live in `frontend/src/content/siteContent.js`.
+- Inquiry-first backend behavior lives in `backend/inquiries/`; use that surface for v1 lead capture instead of extending the legacy payment flow.
+- V1 launch scope is intentionally inquiry-first. Treat Stripe and direct booking as phase 2 unless a story explicitly says otherwise.
+
+---
+
+## [2026-03-25 21:38] - [US-001]
+- Story: Align tracked source with the active property branding
+- Implemented:
+  - Updated frontend package and manifest metadata to the active property branding.
+  - Replaced remaining legacy fallback branding in booking confirmation template and Stripe helper copy.
+  - Updated booking confirmation template context so fallback business email and phone values come from settings.
+- Files changed:
+  - `frontend/package.json`
+  - `frontend/public/manifest.json`
+  - `backend/booking/stripe_utils.py`
+  - `backend/booking/views.py`
+  - `backend/templates/emails/booking_confirmation.html`
+  - `prd.json`
+  - `progress.txt`
+- Validation:
+  - `python manage.py test`
+  - `npm run build`
+  - Playwright browser verification on `http://localhost:3000/` confirmed the page title matched the active property branding
+  - Exact search for the inactive property branding in tracked source excluding Ralph artifacts returned no matches
+- Learnings for future iterations:
+  - Patterns:
+    - Legacy phase-2 files can still leak old branding even when the public v1 path has already been reworked.
+    - Manifest and package metadata are easy to miss during rebrands and should be part of the final branding sweep.
+  - Gotchas:
+    - PowerShell content searches need explicit exclusions for `build`, `__pycache__`, and the Ralph artifacts to avoid noisy false positives.
+  - Useful context:
+    - Backend tests intentionally log SMTP failure traces for the mocked error-handling test while still passing.
+
+---
+
+## [2026-03-25 21:44] - [Brand Direction]
+- The project brand was reverted to `Sheena Residence` based on user direction.
+- Public branding, backend business metadata, and local development email defaults now use `Sheena Residence`.
+
+---
+
+## [2026-03-25 21:59] - [US-002]
+- Story: Add frontend tests for inquiry forms
+- Implemented:
+  - Added a contact inquiry form test that mocks the inquiry API client, submits the form, verifies the success message, and checks that inputs reset.
+  - Added a booking request form test that mocks the inquiry API client, verifies the numeric guest payload, checks the success state, and confirms the form resets.
+  - Added `frontend/src/setupTests.js` so `@testing-library/jest-dom` matchers are available in the CRA test environment.
+- Files changed:
+  - `frontend/src/components/forms/ContactInquiryForm.test.js`
+  - `frontend/src/components/forms/BookingRequestForm.test.js`
+  - `frontend/src/setupTests.js`
+  - `prd.json`
+  - `progress.txt`
+- Validation:
+  - `npm test -- --watchAll=false --runInBand`
+- Learnings for future iterations:
+  - Patterns:
+    - Form tests can stay isolated by mocking `frontend/src/lib/inquiries.js` directly instead of mounting router pages or hitting the backend.
+    - For this CRA setup, `frontend/src/setupTests.js` is the right place to load `@testing-library/jest-dom`.
+  - Gotchas:
+    - The current React Testing Library stack emits a `ReactDOMTestUtils.act` deprecation warning in passing tests; it is noisy but not a functional failure.
+  - Useful context:
+    - The frontend test suite currently consists of the two inquiry form tests only, so the full frontend test command is still fast enough to use as the story proof.
+
+---

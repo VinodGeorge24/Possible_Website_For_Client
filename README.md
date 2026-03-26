@@ -1,4 +1,4 @@
-# Scottsdale Desert Oasis
+# Sheena Residence
 
 A single-property kosher-friendly Scottsdale rental website built with React and Django.
 

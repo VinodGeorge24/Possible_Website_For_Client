@@ -9,9 +9,9 @@ from drf_yasg import openapi
 # Create schema view for API documentation
 schema_view = get_schema_view(
     openapi.Info(
-        title="Scottsdale Desert Oasis API",
+        title="Sheena Residence API",
         default_version='v1',
-        description="API for Scottsdale Desert Oasis property booking website",
+        description="API for Sheena Residence property booking website",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@example.com"),
         license=openapi.License(name="BSD License"),

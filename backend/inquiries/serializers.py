@@ -1,7 +1,23 @@
+import re
+
 from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Inquiry
+
+
+def normalize_phone_number(value, *, required):
+    digits = re.sub(r'\D', '', (value or '').strip())
+
+    if not digits:
+        if required:
+            raise serializers.ValidationError('Please enter a 10-digit phone number.')
+        return ''
+
+    if len(digits) != 10:
+        raise serializers.ValidationError('Please enter a 10-digit phone number.')
+
+    return f'({digits[:3]}) {digits[3:6]}-{digits[6:]}'
 
 
 class ContactInquirySerializer(serializers.ModelSerializer):
@@ -13,6 +29,9 @@ class ContactInquirySerializer(serializers.ModelSerializer):
         if not value.strip():
             raise serializers.ValidationError('Please tell us how we can help.')
         return value
+
+    def validate_phone(self, value):
+        return normalize_phone_number(value, required=False)
 
     def create(self, validated_data):
         return Inquiry.objects.create(kind=Inquiry.KIND_CONTACT, **validated_data)
@@ -27,6 +46,9 @@ class BookingRequestSerializer(serializers.Serializer):
     check_out_date = serializers.DateField()
     guests = serializers.IntegerField(min_value=1, max_value=8)
     message = serializers.CharField(required=False, allow_blank=True)
+
+    def validate_phone(self, value):
+        return normalize_phone_number(value, required=True)
 
     def validate(self, attrs):
         today = timezone.localdate()
