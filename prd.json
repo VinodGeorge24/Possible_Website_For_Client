@@ -1,18 +1,18 @@
 {
-  "project": "Scottsdale Desert Oasis",
+  "project": "Sheena Residence",
   "branchName": "codex/ralph-relaunch-v1",
   "description": "Iterative launch hardening for the inquiry-first Scottsdale kosher rental website",
   "userStories": [
     {
       "id": "US-001",
-      "title": "Remove stale Sheena Residence branding from tracked source",
-      "description": "As the site owner, I need the tracked source to consistently use Scottsdale Desert Oasis so the sellable v1 does not leak the previous property identity.",
+      "title": "Align tracked source with the active property branding",
+      "description": "As the site owner, I need the tracked source to consistently use the active property identity so the sellable v1 does not leak a competing property brand.",
       "acceptanceCriteria": [
-        "Tracked source files no longer contain Sheena Residence in current metadata or booking fallback email copy",
-        "Frontend manifest and package metadata match Scottsdale Desert Oasis branding",
+        "Tracked source files match the active property branding in metadata and booking fallback email copy",
+        "Frontend manifest and package metadata match the active property branding",
         "Backend tests pass",
         "Frontend build passes",
-        "Verify in browser that the public site title is Scottsdale Desert Oasis"
+        "Verify in browser that the public site title matches the active property branding"
       ],
       "priority": 1,
       "passes": true,

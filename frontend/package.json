@@ -1,7 +1,7 @@
 {
-  "name": "scottsdale-desert-oasis-frontend",
+  "name": "sheena-residence-frontend",
   "version": "1.0.0",
-  "description": "Frontend for the Scottsdale Desert Oasis inquiry-first rental website",
+  "description": "Frontend for the Sheena Residence inquiry-first rental website",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",

@@ -1,6 +1,6 @@
 # Plan Folder
 
-This folder tracks active implementation status and near-term execution notes for the Scottsdale Desert Oasis relaunch.
+This folder tracks active implementation status and near-term execution notes for the Sheena Residence relaunch.
 
 ## Files
 

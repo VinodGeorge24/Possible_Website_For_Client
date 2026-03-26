@@ -9,9 +9,9 @@ Started: 2026-03-25 21:40 America/New_York
 ---
 
 ## [2026-03-25 21:38] - [US-001]
-- Story: Remove stale Sheena Residence branding from tracked source
+- Story: Align tracked source with the active property branding
 - Implemented:
-  - Updated frontend package and manifest metadata to Scottsdale Desert Oasis branding.
+  - Updated frontend package and manifest metadata to the active property branding.
   - Replaced remaining legacy fallback branding in booking confirmation template and Stripe helper copy.
   - Updated booking confirmation template context so fallback business email and phone values come from settings.
 - Files changed:
@@ -25,8 +25,8 @@ Started: 2026-03-25 21:40 America/New_York
 - Validation:
   - `python manage.py test`
   - `npm run build`
-  - Playwright browser verification on `http://localhost:3000/` confirmed the page title is `Scottsdale Desert Oasis`
-  - Exact search for `Sheena Residence` in tracked source excluding Ralph artifacts returned no matches
+  - Playwright browser verification on `http://localhost:3000/` confirmed the page title matched the active property branding
+  - Exact search for the inactive property branding in tracked source excluding Ralph artifacts returned no matches
 - Learnings for future iterations:
   - Patterns:
     - Legacy phase-2 files can still leak old branding even when the public v1 path has already been reworked.
@@ -35,5 +35,11 @@ Started: 2026-03-25 21:40 America/New_York
     - PowerShell content searches need explicit exclusions for `build`, `__pycache__`, and the Ralph artifacts to avoid noisy false positives.
   - Useful context:
     - Backend tests intentionally log SMTP failure traces for the mocked error-handling test while still passing.
+
+---
+
+## [2026-03-25 21:44] - [Brand Direction]
+- The project brand was reverted to `Sheena Residence` based on user direction.
+- Public branding, backend business metadata, and local development email defaults now use `Sheena Residence`.
 
 ---

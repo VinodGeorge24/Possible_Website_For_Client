@@ -1,4 +1,4 @@
-# Scottsdale Desert Oasis Project Guide
+# Sheena Residence Project Guide
 
 This document is the quick reference for navigating the relaunch codebase.
 

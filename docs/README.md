@@ -1,6 +1,6 @@
 # Docs Folder
 
-This folder holds launch and handoff documentation for the Scottsdale Desert Oasis project.
+This folder holds launch and handoff documentation for the Sheena Residence project.
 
 ## Files
 

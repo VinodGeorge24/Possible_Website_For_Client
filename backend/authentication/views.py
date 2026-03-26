@@ -218,7 +218,7 @@ class PasswordResetView(generics.GenericAPIView):
         context = {
             'user': user,
             'reset_url': reset_url,
-            'site_name': 'Scottsdale Desert Oasis'
+            'site_name': 'Sheena Residence'
         }
         
         email_html_message = render_to_string('email/password_reset_email.html', context)

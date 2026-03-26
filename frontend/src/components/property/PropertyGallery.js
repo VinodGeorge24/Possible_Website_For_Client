@@ -11,7 +11,7 @@ const PropertyGallery = () => {
 
     // Property details
     const propertyDetails = {
-        name: "Scottsdale Desert Oasis",
+        name: "Sheena Residence",
         address: "7028 E Sheena Drive, Scottsdale Arizona 85254",
         description: `Experience luxury living in this modern Scottsdale retreat. This beautifully renovated property 
             features a private pool and spa, perfect for enjoying the Arizona sunshine. Located in a quiet neighborhood,
